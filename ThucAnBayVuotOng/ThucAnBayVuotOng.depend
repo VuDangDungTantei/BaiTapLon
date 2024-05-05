@@ -1,0 +1,174 @@
+# depslib dependency file v1.0
+1714913631 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\chobayvuotong\doge.cpp
+	"doge.h"
+	<stdio.h>
+	<iostream>
+
+1714913631 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\chobayvuotong\doge.h
+	"lib.h"
+	"pipe.h"
+
+1714896706 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\chobayvuotong\lib.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<string>
+	<vector>
+	<stdio.h>
+
+1714883037 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\chobayvuotong\pipe.h
+	"lib.h"
+	<iostream>
+	<vector>
+
+1714913360 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\chobayvuotong\game.cpp
+	"game.h"
+	"lib.h"
+	<iostream>
+
+1714913641 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\chobayvuotong\game.h
+	"doge.h"
+	"pipe.h"
+	"land.h"
+	"sound.h"
+	<string>
+	<fstream>
+	<sstream>
+
+1714883037 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\chobayvuotong\land.h
+	"lib.h"
+	<vector>
+
+1714908366 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\chobayvuotong\sound.h
+	<SDL_mixer.h>
+	<string>
+	"lib.h"
+
+1714883037 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\chobayvuotong\land.cpp
+	"land.h"
+	<stdio.h>
+	<iostream>
+	<stdlib.h>
+
+1714883037 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\chobayvuotong\lib.cpp
+	"game.h"
+	<iostream>
+
+1714912376 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\chobayvuotong\main.cpp
+	"game.h"
+	"lib.h"
+	<time.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+
+1714912364 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\chobayvuotong\pipe.cpp
+	"pipe.h"
+	"stdio.h"
+
+1714912356 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\chobayvuotong\sound.cpp
+	"sound.h"
+	<stdio.h>
+	<iostream>
+	<string>
+
+1714913631 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\doge.cpp
+	"doge.h"
+	<stdio.h>
+	<iostream>
+
+1714913631 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\doge.h
+	"lib.h"
+	"pipe.h"
+
+1714914303 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\lib.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<string>
+	<vector>
+	<stdio.h>
+
+1714925669 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\pipe.h
+	"Graphics.h"
+	<iostream>
+	<vector>
+
+1714925669 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\game.cpp
+	"game.h"
+	"Graphics.h"
+	<iostream>
+
+1714925669 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\game.h
+	"paimon.h"
+	"pipe.h"
+	"land.h"
+	"sound.h"
+	<bits/stdc++.h>
+
+1714925669 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\land.h
+	"Graphics.h"
+	<vector>
+
+1714925669 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\sound.h
+	<SDL_mixer.h>
+	<string>
+	"Graphics.h"
+
+1714925669 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\land.cpp
+	"land.h"
+	<stdio.h>
+	<iostream>
+	<stdlib.h>
+
+1714883037 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\lib.cpp
+	"game.h"
+	<iostream>
+
+1714925669 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\main.cpp
+	"game.h"
+	"Graphics.h"
+	<time.h>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+
+1714925669 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\pipe.cpp
+	"pipe.h"
+	"stdio.h"
+
+1714925669 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\sound.cpp
+	"sound.h"
+	<stdio.h>
+	<iostream>
+	<string>
+
+1714925669 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\paimon.cpp
+	"paimon.h"
+	<stdio.h>
+	<iostream>
+
+1714925669 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\paimon.h
+	"Graphics.h"
+	"pipe.h"
+
+1714925669 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\graphics.h
+	"def.h"
+
+1714925669 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\graphics.cpp
+	"game.h"
+	<iostream>
+
+1714925669 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\def.h
+	<fstream>
+	<sstream>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<string>
+	<vector>
+	<stdio.h>
+	<iostream>
+
