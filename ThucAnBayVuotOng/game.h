@@ -30,12 +30,12 @@ public:
 
     bool isQuit()
     {
-        return quit;
+        return Detail::quit;
     }
 
     bool isDie()
     {
-        return die;
+        return Detail::die;
     }
 
     int getPipeWidth()
@@ -64,8 +64,6 @@ public:
 
     void renderBackground();
 
-    void renderBackgroundNight();
-
     void renderLand();
 
     void resume();
@@ -74,9 +72,7 @@ public:
 
     void renderPauseTab();
 
-    void lightTheme();
-
-    void nextButton();
+    void character();
 
     void renderGameOver();
 
@@ -87,7 +83,6 @@ public:
     void Restart();
 
 private:
-    const double scaleNumberS = 0.75;
     int bestScore;
 };
 

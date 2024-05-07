@@ -3,6 +3,7 @@
 
 #include "Graphics.h"
 #include "pipe.h"
+#include "def.h"
 
 using namespace std;
 
@@ -22,7 +23,7 @@ public:
 
     void fall();
 
-    void update(short int pileWidth, short int pileHeight);
+    void update(int pileWidth, int pileHeight);
 private:
     int angle, time, x0;
     int ahead = 0;

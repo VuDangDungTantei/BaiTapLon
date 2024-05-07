@@ -90,33 +90,33 @@
 	<vector>
 	<stdio.h>
 
-1714925669 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\pipe.h
+1715051366 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\pipe.h
 	"Graphics.h"
 	<iostream>
 	<vector>
 
-1714925669 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\game.cpp
+1715054196 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\game.cpp
 	"game.h"
 	"Graphics.h"
 	<iostream>
 
-1714925669 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\game.h
+1715054196 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\game.h
 	"paimon.h"
 	"pipe.h"
 	"land.h"
 	"sound.h"
 	<bits/stdc++.h>
 
-1714925669 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\land.h
+1715048148 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\land.h
 	"Graphics.h"
 	<vector>
 
-1714925669 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\sound.h
+1715054611 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\sound.h
 	<SDL_mixer.h>
 	<string>
 	"Graphics.h"
 
-1714925669 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\land.cpp
+1715053434 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\land.cpp
 	"land.h"
 	<stdio.h>
 	<iostream>
@@ -126,7 +126,7 @@
 	"game.h"
 	<iostream>
 
-1714925669 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\main.cpp
+1715056097 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\main.cpp
 	"game.h"
 	"Graphics.h"
 	<time.h>
@@ -135,35 +135,34 @@
 	<SDL_image.h>
 	<SDL_ttf.h>
 
-1714925669 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\pipe.cpp
+1715052538 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\pipe.cpp
 	"pipe.h"
 	"stdio.h"
 
-1714925669 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\sound.cpp
+1715057352 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\sound.cpp
 	"sound.h"
 	<stdio.h>
 	<iostream>
 	<string>
 
-1714925669 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\paimon.cpp
+1715054587 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\paimon.cpp
 	"paimon.h"
 	<stdio.h>
 	<iostream>
 
-1714925669 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\paimon.h
+1715053434 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\paimon.h
 	"Graphics.h"
 	"pipe.h"
-
-1714925669 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\graphics.h
 	"def.h"
 
-1714925669 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\graphics.cpp
+1715009286 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\graphics.h
+	"def.h"
+
+1715009286 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\graphics.cpp
 	"game.h"
 	<iostream>
 
-1714925669 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\def.h
-	<fstream>
-	<sstream>
+1715050448 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\def.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>

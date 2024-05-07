@@ -10,13 +10,15 @@ using namespace std;
 class sound:Texture
 {
 public:
-    bool init();
+    bool initSound();
 
     void Free();
 
-    void playBreath();
+    void playFlyup();
 
     void playHit();
+
+    void playgetPoint();
 
     void renderSound();
 
@@ -26,7 +28,8 @@ private:
     const int POS_X = 107;
     const int POS_Y = 267;
     bool isPlay = 0;
-    Mix_Chunk* breath = NULL;
+    Mix_Chunk* getpoint = NULL;
+    Mix_Chunk* flyup = NULL;
     Mix_Chunk* hit = NULL;
     Mix_Chunk* drop = NULL;
     SDL_Rect Mute ;

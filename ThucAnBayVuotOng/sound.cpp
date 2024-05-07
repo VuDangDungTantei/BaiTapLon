@@ -3,11 +3,12 @@
 #include <iostream>
 #include <string>
 
-bool sound::init()
+bool sound::initSound()
 {
-    string breath_path = "sound/sfx_breath.wav";
-    string hit_path = "sound/sfx_bonk.wav";
-    string sound_path = "image/sound.png";
+    string flyup_path = "sound/sfx_flyup.wav";
+    string hit_path = "sound/sfx_hit.wav";
+    string getPoint_path = "sound/sfx_point.wav";
+    string Changesound_path = "image/sound.png";
 
     bool success = true;
 
@@ -24,8 +25,15 @@ bool sound::init()
             success = false;
         }
 
-        breath = Mix_LoadWAV( breath_path.c_str() );
-        if ( breath == NULL )
+        getpoint = Mix_LoadWAV( getPoint_path.c_str() );
+        if ( getpoint == NULL )
+        {
+            printf( "Failed to load sound! SDL_mixer Error: %s\n", Mix_GetError() );
+            success = false;
+        }
+
+        flyup = Mix_LoadWAV( flyup_path.c_str() );
+        if ( flyup == NULL )
         {
             printf( "Failed to load sound! SDL_mixer Error: %s\n", Mix_GetError() );
             success = false;
@@ -38,7 +46,7 @@ bool sound::init()
             success = false;
         }
 
-        if (!Load(sound_path))
+        if (!LoadImg(Changesound_path, 1))
         {
             return false;
         }
@@ -60,19 +68,27 @@ void sound::Free()
 {
     free();
 
-    Mix_FreeChunk(breath);
-    breath = NULL;
+    Mix_FreeChunk(flyup);
+    flyup = NULL;
     Mix_FreeChunk(hit);
     hit = NULL;
 
     Mix_Quit();
 }
 
-void sound::playBreath()
+void sound::playgetPoint()
+{
+    if(isPlay)
+    {
+        Mix_PlayChannel(-1, getpoint, 0);
+    }
+}
+
+void sound::playFlyup()
 {
     if (isPlay)
     {
-        Mix_PlayChannel( -1, breath, 0 );
+        Mix_PlayChannel( -1, flyup, 0 );
     }
 }
 

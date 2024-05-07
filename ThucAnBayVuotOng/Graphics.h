@@ -16,11 +16,9 @@ class Texture
 public:
     Texture();
 
-    ~Texture() {}
+    ~Texture();
 
-    bool isNULL();
-
-    bool Load(string path, double scale = 1);
+    bool LoadImg(string path, double scale);
 
     int getWidth();
     int getHeight();
@@ -32,13 +30,5 @@ public:
 
     int Width;
     int Height;
-
-public:
-    static SDL_Window* window;
-    static SDL_Renderer* renderer;
-    static SDL_Event event;
-    static bool quit;
-    static bool die;
-    static int score;
 };
 #endif

@@ -8,6 +8,7 @@
 
 const int FPS = 60;
 const int frameDelay = 1000 / FPS;
+int soundGetPoint = Detail::score;
 
 using namespace std;
 
@@ -19,7 +20,7 @@ int main(int argc, char** argv)
     bool isMenu = 0;
     bool isPause = 0;
     bool isSound = 1;
-    bool isDark = 0;
+    bool LPaimon = 0;
 
     while(!g.isQuit())
     {
@@ -44,8 +45,7 @@ int main(int argc, char** argv)
                     }
                     g.userInput.Type = game::input::NONE;
                 }
-                if (!isDark) g.renderBackground();
-                else g.renderBackgroundNight();
+                g.renderBackground();
                 g.pipe.render();
                 g.land.render();
                 if (isMenu)
@@ -59,8 +59,8 @@ int main(int argc, char** argv)
                 }
                 else
                 {
-                    g.pipe.init();
-                    g.paimon.init(isDark);
+                    g.pipe.initPipe();
+                    g.paimon.init(LPaimon);
                     g.paimon.render();
                     g.rendergameMenu();
                     if (g.userInput.Type == game::input::PLAY)
@@ -73,7 +73,7 @@ int main(int argc, char** argv)
                 }
                 g.display();
             }
-            g.pipe.init();
+            g.pipe.initPipe();
         }
         else
         {
@@ -84,16 +84,14 @@ int main(int argc, char** argv)
                 isPause = abs(1 - isPause);
                 g.userInput.Type = game::input::NONE;
             }
-
             if (isPause == 0 && g.userInput.Type == game::input::PLAY)
             {
-                if (isSound) g.sound.playBreath();
+                if (isSound) g.sound.playFlyup();
                 g.paimon.resetTime();
                 g.userInput.Type = game::input::NONE;
             }
 
-            if (!isDark) g.renderBackground();
-            else g.renderBackgroundNight();
+            g.renderBackground();
             g.pipe.render();
             g.land.render();
             g.paimon.render();
@@ -101,6 +99,11 @@ int main(int argc, char** argv)
 
             if (!isPause)
             {
+                if(soundGetPoint != Detail::score && Detail::score != 0)
+                {
+                    g.sound.playgetPoint();
+                    soundGetPoint = Detail::score;
+                }
                 g.paimon.update(g.getPipeWidth(), g.getPipeHeight());
                 g.pipe.update();
                 g.land.update();
@@ -114,7 +117,6 @@ int main(int argc, char** argv)
                 g.renderBestScore();
                 g.replay();
                 g.sound.renderSound();
-                g.nextButton();
                 if (g.userInput.Type == game::input::PLAY)
                 {
                     if (g.checkReplay())

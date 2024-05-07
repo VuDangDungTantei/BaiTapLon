@@ -4,18 +4,19 @@
 
 void game::takeInput()
 {
-    while(SDL_PollEvent(&event) != 0)
+    SDL_Event &e = Detail::event;
+    while(SDL_PollEvent(&e) != 0)
     {
-        if (event.type == SDL_QUIT)
+        if (e.type == SDL_QUIT)
         {
             userInput.Type = input::QUIT;
-            quit = true;
+            Detail::quit = true;
         }
-        else if (event.type == SDL_MOUSEBUTTONDOWN && event.key.repeat == 0)
+        else if (e.type == SDL_MOUSEBUTTONDOWN && e.key.repeat == 0)
         {
             userInput.Type = input::PLAY;
         }
-        else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE && event.key.repeat == 0)
+        else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE && e.key.repeat == 0)
         {
             userInput.Type = input::PAUSE;
         }
@@ -25,9 +26,9 @@ void game::takeInput()
 game::game()
 {
     initGraphic();
-    pipe.init();
-    land.init();
-    sound.init();
+    pipe.initPipe();
+    land.initLand();
+    sound.initSound();
 }
 
 game::~game()
@@ -42,10 +43,10 @@ game::~game()
 
 void game::releaseGraphic()
 {
-    SDL_DestroyWindow( window );
-    window = NULL;
-    SDL_DestroyRenderer( renderer );
-    renderer = NULL;
+    SDL_DestroyWindow( Detail::window );
+    Detail::window = NULL;
+    SDL_DestroyRenderer( Detail::renderer );
+    Detail::renderer = NULL;
     IMG_Quit();
     TTF_Quit();
     SDL_Quit();
@@ -67,24 +68,24 @@ bool game::initGraphic()
             printf( "Warning: Linear texture filtering not enabled!" );
         }
 
-        window = SDL_CreateWindow( "ThucAnBayVuotOng", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+        Detail::window = SDL_CreateWindow( "ThucAnBayVuotOng", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 
-        if( window == NULL )
+        if( Detail::window == NULL )
         {
             printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
             success = false;
         }
         else
         {
-            renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-            if( renderer == NULL )
+            Detail::renderer = SDL_CreateRenderer( Detail::window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+            if( Detail::renderer == NULL )
             {
                 printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
                 success = false;
             }
             else
             {
-                SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255);
+                SDL_SetRenderDrawColor( Detail::renderer, 255, 255, 255, 255);
 
                 int imgFlags = IMG_INIT_PNG;
                 if( !( IMG_Init( imgFlags ) & imgFlags ) )
@@ -107,50 +108,50 @@ bool game::initGraphic()
 
 void game::display()
 {
-    SDL_RenderPresent(renderer);
-    SDL_RenderClear(renderer);
+    SDL_RenderPresent(Detail::renderer);
+    SDL_RenderClear(Detail::renderer);
 }
 
 void game::renderScoreSmall()
 {
-    string s = to_string(score);
-    signed char len = s.length();
+    string s = to_string(Detail::score);
+    int len = s.length();
     Texture image;
 
     for (int i = len - 1; i >= 0; i--)
     {
-        signed char number = s[i] - '0';
+        int number = s[i] - '0';
         switch(number)
         {
         case 1:
-            image.Load("image/S1.png", scaleNumberS);
+            image.LoadImg("image/S1.png", 0.75);
             break;
         case 2:
-            image.Load("image/S2.png", scaleNumberS);
+            image.LoadImg("image/S2.png", 0.75);
             break;
         case 3:
-            image.Load("image/S3.png", scaleNumberS);
+            image.LoadImg("image/S3.png", 0.75);
             break;
         case 4:
-            image.Load("image/S4.png", scaleNumberS);
+            image.LoadImg("image/S4.png", 0.75);
             break;
         case 5:
-            image.Load("image/S5.png", scaleNumberS);
+            image.LoadImg("image/S5.png", 0.75);
             break;
         case 6:
-            image.Load("image/S6.png", scaleNumberS);
+            image.LoadImg("image/S6.png", 0.75);
             break;
         case 7:
-            image.Load("image/S7.png", scaleNumberS);
+            image.LoadImg("image/S7.png", 0.75);
             break;
         case 8:
-            image.Load("image/S8.png", scaleNumberS);
+            image.LoadImg("image/S8.png", 0.75);
             break;
         case 9:
-            image.Load("image/S9.png", scaleNumberS);
+            image.LoadImg("image/S9.png", 0.75);
             break;
         default:
-            image.Load("image/S0.png", scaleNumberS);
+            image.LoadImg("image/S0.png", 0.75);
             break;
         }
         image.Render(260 - image.getWidth() * (len - i - 1) * 0.75 - 5 * (len - i - 1), 268);
@@ -160,44 +161,44 @@ void game::renderScoreSmall()
 
 void game::renderScoreLarge()
 {
-    string s = to_string(score);
-    signed char len = s.length();
+    string s = to_string(Detail::score);
+    int len = s.length();
     Texture image;
 
-    for (signed char i = 0; i < len; i++)
+    for (int i = 0; i < len; i++)
     {
-        signed char number = s[i] - '0';
+        int number = s[i] - '0';
         switch(number)
         {
         case 0:
-            image.Load("image/0.png", 1);
+            image.LoadImg("image/0.png", 1);
             break;
         case 1:
-            image.Load("image/1.png", 1);
+            image.LoadImg("image/1.png", 1);
             break;
         case 2:
-            image.Load("image/2.png", 1);
+            image.LoadImg("image/2.png", 1);
             break;
         case 3:
-            image.Load("image/3.png", 1);
+            image.LoadImg("image/3.png", 1);
             break;
         case 4:
-            image.Load("image/4.png", 1);
+            image.LoadImg("image/4.png", 1);
             break;
         case 5:
-            image.Load("image/5.png", 1);
+            image.LoadImg("image/5.png", 1);
             break;
         case 6:
-            image.Load("image/6.png", 1);
+            image.LoadImg("image/6.png", 1);
             break;
         case 7:
-            image.Load("image/7.png", 1);
+            image.LoadImg("image/7.png", 1);
             break;
         case 8:
-            image.Load("image/8.png", 1);
+            image.LoadImg("image/8.png", 1);
             break;
         default:
-            image.Load("image/9.png", 1);
+            image.LoadImg("image/9.png", 1);
             break;
         }
         image.Render((SCREEN_WIDTH - (image.getWidth() * len + (len - 1) * 10)) / 2 + (i + 30) * i, 100);
@@ -207,67 +208,65 @@ void game::renderScoreLarge()
 
 void game::renderBestScore()
 {
-    ifstream fileIn("Score/bestScore.txt");
-    fileIn >> bestScore;
-    ofstream fileOut("Score/bestScore.txt", ios::trunc);
+    freopen("Score/bestScore.txt", "r", stdin);
+    cin >> bestScore;
+    freopen("Score/bestScore.txt", "w", stdout);
 
-    if (score > bestScore)
+    if (Detail::score > bestScore)
     {
-        bestScore = score;
+        bestScore = Detail::score;
     }
     string s = to_string(bestScore);
-    signed char len = s.length();
+    int len = s.length();
     Texture image;
 
-    for (signed char i = len-1; i >= 0; i--)
+    for (int i = len-1; i >= 0; i--)
     {
-        signed char number = s[i] - '0';
+        int number = s[i] - '0';
         switch(number)
         {
         case 1:
-            image.Load("image/S1.png", scaleNumberS);
+            image.LoadImg("image/S1.png", 0.75);
             break;
         case 2:
-            image.Load("image/S2.png", scaleNumberS);
+            image.LoadImg("image/S2.png", 0.75);
             break;
         case 3:
-            image.Load("image/S3.png", scaleNumberS);
+            image.LoadImg("image/S3.png", 0.75);
             break;
         case 4:
-            image.Load("image/S4.png", scaleNumberS);
+            image.LoadImg("image/S4.png", 0.75);
             break;
         case 5:
-            image.Load("image/S5.png", scaleNumberS);
+            image.LoadImg("image/S5.png", 0.75);
             break;
         case 6:
-            image.Load("image/S6.png", scaleNumberS);
+            image.LoadImg("image/S6.png", 0.75);
             break;
         case 7:
-            image.Load("image/S7.png", scaleNumberS);
+            image.LoadImg("image/S7.png", 0.75);
             break;
         case 8:
-            image.Load("image/S8.png", scaleNumberS);
+            image.LoadImg("image/S8.png", 0.75);
             break;
         case 9:
-            image.Load("image/S9.png", scaleNumberS);
+            image.LoadImg("image/S9.png", 0.75);
             break;
         default:
-            image.Load("image/S0.png", scaleNumberS);
+            image.LoadImg("image/S0.png", 0.75);
             break;
         }
         image.Render(260 - image.getWidth()*(len-i-1)*0.75 - 5*(len - i - 1), 315);
     }
     image.free();
 
-    fileOut << bestScore;
-    fileIn.close();
-    fileOut.close();
+    cout << bestScore;
 }
 
 void game::rendergameMenu()
 {
     Texture image;
-    image.Load("image/gameMenu.png", 1);
+    image.LoadImg("image/gameMenu.png", 1);
     image.Render((SCREEN_WIDTH - image.getWidth()) / 2, 180);
     image.free();
 }
@@ -275,15 +274,7 @@ void game::rendergameMenu()
 void game::renderBackground()
 {
     Texture image;
-    image.Load("image/background.png", 1);
-    image.Render(0, 0);
-    image.free();
-}
-
-void game::renderBackgroundNight()
-{
-    Texture image;
-    image.Load("image/background-night.png", 1);
+    image.LoadImg("image/background.png", 1);
     image.Render(0, 0);
     image.free();
 }
@@ -291,7 +282,7 @@ void game::renderBackgroundNight()
 void game::renderLand()
 {
     Texture image;
-    image.Load("image/land.png", 1);
+    image.LoadImg("image/land.png", 1);
     image.Render((SCREEN_WIDTH - image.getWidth()) / 2, SCREEN_HEIGHT- image.getHeight());
     image.free();
 }
@@ -299,7 +290,7 @@ void game::renderLand()
 void game::resume()
 {
     Texture image;
-    image.Load("image/resume.png", 1);
+    image.LoadImg("image/resume.png", 1);
     image.Render(SCREEN_WIDTH - 50, 20);
     image.free();
 }
@@ -307,7 +298,7 @@ void game::resume()
 void game::pause()
 {
     Texture image;
-    image.Load("image/pause.png", 1);
+    image.LoadImg("image/pause.png", 1);
     image.Render(SCREEN_WIDTH - 50, 20);
     image.free();
 }
@@ -315,33 +306,23 @@ void game::pause()
 void game::renderPauseTab()
 {
     Texture image;
-    image.Load("image/pauseTab.png", 1);
+    image.LoadImg("image/pauseTab.png", 1);
     image.Render((SCREEN_WIDTH - image.getWidth()) / 2, 230);
     image.free();
 }
 
-void game::lightTheme()
+void game::character()
 {
     Texture image;
-    image.Load("image/paimon.png", 0.8);
+    image.LoadImg("image/paimon.png", 0.8);
     image.Render(105, 315);
-    image.free();
-}
-
-void game::nextButton()
-{
-    Texture image;
-    image.Load("image/nextRight.png", 1);
-    image.Render(149, 322);
-    image.Load("image/nextLeft.png", 1);
-    image.Render(88, 322);
     image.free();
 }
 
 void game::renderGameOver()
 {
     Texture image;
-    image.Load("image/gameOver.png", 1);
+    image.LoadImg("image/gameOver.png", 1);
     image.Render((SCREEN_WIDTH - image.getWidth()) / 2, 150);
     image.free();
 }
@@ -349,7 +330,7 @@ void game::renderGameOver()
 void game::replay()
 {
     Texture image;
-    image.Load("image/replay.png", 1);
+    image.LoadImg("image/replay.png", 1);
     image.Render((SCREEN_WIDTH - image.getWidth()) / 2, 380);
     image.free();
 }
@@ -367,7 +348,7 @@ bool game::checkReplay()
 
 void game::Restart()
 {
-    die = false;
-    score = 0;
+    Detail::die = false;
+    Detail::score = 0;
     paimon.resetTime();
 }

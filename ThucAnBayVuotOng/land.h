@@ -9,7 +9,7 @@ using namespace std;
 class land : Texture
 {
 public:
-    bool init();
+    bool initLand();
 
     void Free();
 

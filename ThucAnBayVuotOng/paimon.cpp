@@ -11,10 +11,10 @@ bool paimon::init(bool LPaimon)
         ahead = 0;
         angle = 0;
     }
-    if (isNULL() || saved_path != paimon_path)
+    if (texture == NULL || saved_path != paimon_path)
     {
         saved_path = paimon_path;
-        if ( Load(paimon_path.c_str(), 1) )
+        if (LoadImg(paimon_path.c_str(), 1))
         {
             return true;
         }
@@ -39,7 +39,7 @@ void paimon::render()
 
 void paimon::fall()
 {
-    if (die && posPaimon.y < SCREEN_HEIGHT - LAND_HEIGHT - PAIMON_HEIGHT - 5)
+    if (Detail::die && posPaimon.y < SCREEN_HEIGHT - LAND_HEIGHT - PAIMON_HEIGHT - 5)
     {
         if (time == 0)
         {
@@ -60,9 +60,9 @@ void paimon::fall()
     else return;
 }
 
-void paimon::update(short int pipeWidth, short int pipeHeight)
+void paimon::update(int pipeWidth, int pipeHeight)
 {
-    if (!die)
+    if (!Detail::die)
     {
         if (time == 0)
         {
@@ -83,17 +83,17 @@ void paimon::update(short int pipeWidth, short int pipeHeight)
         if ( (posPaimon.x + getWidth() > posPipe[ahead].x + 5) && (posPaimon.x + 5 < posPipe[ahead].x + pipeWidth) &&
                 (posPaimon.y + 5 < posPipe[ahead].y + pipeHeight || posPaimon.y  + getHeight() > posPipe[ahead].y + pipeHeight + PIPE_SPACE + 5) )
         {
-            die = true;
+            Detail::die = true;
         }
         else if (posPaimon.x > posPipe[ahead].x + pipeWidth )
         {
             ahead = ( ahead + 1 ) % TOTAL_PIPE;
-            score++;
+            Detail::score++;
         }
 
         if (posPaimon.y > SCREEN_HEIGHT - LAND_HEIGHT - PAIMON_HEIGHT - 5 || posPaimon.y < - 10 )
         {
-            die = true;
+            Detail::die = true;
         }
     }
 }

@@ -3,13 +3,13 @@
 #include <iostream>
 #include <stdlib.h>
 
-bool land::init()
+bool land::initLand()
 {
     posLand.getPos(0, SCREEN_HEIGHT - LAND_HEIGHT);
     string back_path = "image/land.png";
-    if (isNULL())
+    if (texture == NULL)
     {
-        if ( Load( back_path.c_str(), 1 ) )
+        if (LoadImg(back_path.c_str(), 1))
         {
             return true;
         }

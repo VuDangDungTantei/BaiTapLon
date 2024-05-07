@@ -3,18 +3,18 @@
 
 vector<position> posPipe;
 
-bool pipe::init()
+bool pipe::initPipe()
 {
     posPipe.clear();
-    for (signed char i = 0; i < TOTAL_PIPE; i++)
+    for (int i = 0; i < TOTAL_PIPE; i++)
     {
         position temp;
         temp.getPos(SCREEN_WIDTH + i * PIPE_DISTANCE + 350, (rand() % (randMax - randMin + 1)) + randMin);
         posPipe.push_back(temp);
     }
-    if (isNULL())
+    if (Texture::texture == NULL)
     {
-        if (Load( "image/pipe.png", 1 ))
+        if (LoadImg( "image/pipe.png", 1))
         {
             return true;
         }
@@ -29,21 +29,21 @@ void pipe::Free()
 
 void pipe::render()
 {
-    for (signed char i = 0; i < TOTAL_PIPE; i++)
+    for (int i = 0; i < TOTAL_PIPE; i++)
     {
         if (posPipe[i].x <= SCREEN_WIDTH && posPipe[i].x > -getWidth())
         {
-            Render(posPipe[i].x, posPipe[i].y);
+            Render(posPipe[i].x, posPipe[i].y, 0, NULL, SDL_FLIP_NONE);
         }
-        Render(posPipe[i].x, posPipe[i].y + getHeight() + PIPE_SPACE, 180);
+        Render(posPipe[i].x, posPipe[i].y + getHeight() + PIPE_SPACE, 180, NULL, SDL_FLIP_NONE);
     }
 }
 
 void pipe::update()
 {
-    if (!die)
+    if (!Detail::die)
     {
-        for (signed char i = 0; i < TOTAL_PIPE; i++)
+        for (int i = 0; i < TOTAL_PIPE; i++)
         {
             if (posPipe[i].x < - getWidth())
             {

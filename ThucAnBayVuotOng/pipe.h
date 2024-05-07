@@ -7,15 +7,13 @@
 
 using namespace std;
 
-extern vector<position> posPipe;
-
 class pipe:Texture
 {
 private:
-    const short int randMin = -373 + 30;
-    const short int randMax = SCREEN_HEIGHT - LAND_HEIGHT - 373 - PIPE_DISTANCE - 30;
+    const int randMin = -370 + 30;//-340
+    const int randMax = SCREEN_HEIGHT - LAND_HEIGHT - 370 - PIPE_DISTANCE - 30;//-135
 public:
-    bool init();
+    bool initPipe();
 
     void Free();
 
@@ -33,5 +31,7 @@ public:
         return getHeight();
     }
 };
+
+extern vector<position> posPipe;
 
 #endif
