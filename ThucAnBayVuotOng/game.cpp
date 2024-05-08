@@ -12,7 +12,7 @@ void game::takeInput()
             userInput.Type = input::QUIT;
             Detail::quit = true;
         }
-        else if (e.type == SDL_MOUSEBUTTONDOWN && e.key.repeat == 0)
+        else if ((e.type == SDL_MOUSEBUTTONDOWN && e.key.repeat == 0) || (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_UP && e.key.repeat == 0))
         {
             userInput.Type = input::PLAY;
         }
@@ -38,10 +38,10 @@ game::~game()
     land.Free();
     sound.Free();
     free();
-    releaseGraphic();
+    freeGraphic();
 }
 
-void game::releaseGraphic()
+void game::freeGraphic()
 {
     SDL_DestroyWindow( Detail::window );
     Detail::window = NULL;
@@ -52,53 +52,25 @@ void game::releaseGraphic()
     SDL_Quit();
 }
 
-bool game::initGraphic()
-{
+bool game::initGraphic() {
     bool success = true;
+    int ret = SDL_Init(SDL_INIT_VIDEO);
+    if(ret < 0) return false;
 
-    if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
-    {
-        printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
-        success = false;
-    }
-    else
-    {
-        if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
-        {
-            printf( "Warning: Linear texture filtering not enabled!" );
-        }
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 
-        Detail::window = SDL_CreateWindow( "ThucAnBayVuotOng", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+    Detail::window = SDL_CreateWindow("ThucAnBayVuotOng", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
-        if( Detail::window == NULL )
-        {
-            printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
-            success = false;
-        }
-        else
-        {
-            Detail::renderer = SDL_CreateRenderer( Detail::window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-            if( Detail::renderer == NULL )
-            {
-                printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
+    if(Detail::window == NULL) success = false;
+
+    else {
+        Detail::renderer = SDL_CreateRenderer(Detail::window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+        if(Detail::renderer == NULL) success = false;
+        else {
+            SDL_SetRenderDrawColor(Detail::renderer, 255, 255, 255, 255);
+            int imgFlags = IMG_INIT_PNG;
+            if(!(IMG_Init(imgFlags) && imgFlags)) {
                 success = false;
-            }
-            else
-            {
-                SDL_SetRenderDrawColor( Detail::renderer, 255, 255, 255, 255);
-
-                int imgFlags = IMG_INIT_PNG;
-                if( !( IMG_Init( imgFlags ) & imgFlags ) )
-                {
-                    printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
-                    success = false;
-                }
-
-                if( TTF_Init() == -1 )
-                {
-                    printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
-                    success = false;
-                }
             }
         }
     }
@@ -106,7 +78,7 @@ bool game::initGraphic()
     return success;
 }
 
-void game::display()
+void game::presentScene()
 {
     SDL_RenderPresent(Detail::renderer);
     SDL_RenderClear(Detail::renderer);
@@ -339,10 +311,7 @@ bool game::checkReplay()
 {
     int x, y;
     SDL_GetMouseState(&x, &y);
-    if (x > (SCREEN_WIDTH - 100)/2 && x < (SCREEN_WIDTH + 100) / 2 && y > 380 && y < 380 + 60)
-    {
-        return true;
-    }
+    if (x > 125 && x < 225 && y > 380 && y < 440) return true;
     return false;
 }
 

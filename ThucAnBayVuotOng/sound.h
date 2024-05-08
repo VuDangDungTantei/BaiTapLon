@@ -25,15 +25,13 @@ public:
     bool checkSound();
 
 private:
-    const int POS_X = 107;
-    const int POS_Y = 267;
-    bool isPlay = 0;
+    bool isPlay = false;
     Mix_Chunk* getpoint = NULL;
     Mix_Chunk* flyup = NULL;
     Mix_Chunk* hit = NULL;
     Mix_Chunk* drop = NULL;
     SDL_Rect Mute ;
-    SDL_Rect Active ;
+    SDL_Rect Play ;
 };
 
 #endif

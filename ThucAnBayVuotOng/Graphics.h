@@ -5,9 +5,9 @@
 
 using namespace std;
 
-struct position
+struct pos
 {
-    int x, y, angle, state;
+    int x, y;
     void getPos(const int x, const int y);
 };
 

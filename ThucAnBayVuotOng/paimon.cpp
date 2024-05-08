@@ -2,29 +2,19 @@
 #include <stdio.h>
 #include <iostream>
 
-bool paimon::init(bool LPaimon)
+void paimon::initPaimon()
 {
     string paimon_path = "image/paimon.png";
-    if (saved_path == paimon_path)
+    if (texture != NULL)
     {
         posPaimon.getPos(75, SCREEN_HEIGHT / 2 - 10);
-        ahead = 0;
+        next = 0;
         angle = 0;
     }
-    if (texture == NULL || saved_path != paimon_path)
+    if (texture == NULL)
     {
-        saved_path = paimon_path;
-        if (LoadImg(paimon_path.c_str(), 1))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
+        LoadImg(paimon_path.c_str(), 1);
     }
-    return false;
 }
 
 void paimon::Free()
@@ -32,18 +22,18 @@ void paimon::Free()
     free();
 }
 
-void paimon::render()
+void paimon::renderP()
 {
     Render(posPaimon.x, posPaimon.y, angle);
 }
 
 void paimon::fall()
 {
-    if (Detail::die && posPaimon.y < SCREEN_HEIGHT - LAND_HEIGHT - PAIMON_HEIGHT - 5)
+    if (Detail::die && posPaimon.y < SCREEN_HEIGHT - LAND_HEIGHT - PAIMON_HEIGHT)
     {
         if (time == 0)
         {
-            x0 = posPaimon.y;
+            now = posPaimon.y;
             angle = -25;
         }
         else if (angle < 70 && time > 30)
@@ -53,45 +43,40 @@ void paimon::fall()
 
         if (time >= 0)
         {
-            posPaimon.y = x0 + time * time * 0.18 - 7.3 * time;
+            posPaimon.y = now + time * time * 0.18 - 7.3 * time;
             time++;
         }
     }
     else return;
 }
 
-void paimon::update(int pipeWidth, int pipeHeight)
+void paimon::update(int W, int H)
 {
     if (!Detail::die)
     {
         if (time == 0)
         {
-            x0 = posPaimon.y;
+            now = posPaimon.y;
             angle = 0;
         }
-        else if (angle < 70 && time > 30)
-        {
-            angle += 3;
-        }
-
         if (time >= 0)
         {
-            posPaimon.y = x0 + time * time * 0.18 - 7.3 * time;
+            posPaimon.y = now + time * time * 0.18 - 7.3 * time;
             time++;
         }
 
-        if ( (posPaimon.x + getWidth() > posPipe[ahead].x + 5) && (posPaimon.x + 5 < posPipe[ahead].x + pipeWidth) &&
-                (posPaimon.y + 5 < posPipe[ahead].y + pipeHeight || posPaimon.y  + getHeight() > posPipe[ahead].y + pipeHeight + PIPE_SPACE + 5) )
+        if ((posPaimon.x + getWidth() > posPipe[next].x) && (posPaimon.x < posPipe[next].x + W) &&
+                (posPaimon.y < posPipe[next].y + H || posPaimon.y  + getHeight() > posPipe[next].y + H + 170))
         {
             Detail::die = true;
         }
-        else if (posPaimon.x > posPipe[ahead].x + pipeWidth )
+        else if (posPaimon.x > posPipe[next].x + W)
         {
-            ahead = ( ahead + 1 ) % TOTAL_PIPE;
+            next = (next + 1) % 4;
             Detail::score++;
         }
 
-        if (posPaimon.y > SCREEN_HEIGHT - LAND_HEIGHT - PAIMON_HEIGHT - 5 || posPaimon.y < - 10 )
+        if (posPaimon.y > SCREEN_HEIGHT - LAND_HEIGHT - PAIMON_HEIGHT || posPaimon.y < 0)
         {
             Detail::die = true;
         }

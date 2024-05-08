@@ -6,10 +6,10 @@
 bool land::initLand()
 {
     posLand.getPos(0, SCREEN_HEIGHT - LAND_HEIGHT);
-    string back_path = "image/land.png";
+    string land_path = "image/land.png";
     if (texture == NULL)
     {
-        if (LoadImg(back_path.c_str(), 1))
+        if (LoadImg(land_path.c_str(), 1))
         {
             return true;
         }
@@ -35,7 +35,7 @@ void land::render()
     else if (posLand.x > -SCREEN_WIDTH && posLand.x <= 0)
     {
         Render(posLand.x, posLand.y);
-        Render(posLand.x + SCREEN_WIDTH, posLand.y, 0, NULL);
+        Render(posLand.x + SCREEN_WIDTH, posLand.y);
     }
     else
     {

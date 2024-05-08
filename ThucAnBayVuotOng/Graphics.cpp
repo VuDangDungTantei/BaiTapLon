@@ -7,6 +7,7 @@ bool Detail::quit = false;
 bool Detail::die = true;
 int Detail::score = 0;
 SDL_Event Detail::event;
+SDL_Texture* Detail::PrimTexture = NULL;
 
 Texture::Texture()
 {
@@ -73,7 +74,7 @@ bool Texture::LoadImg(string path, double scale)
 
 }
 
-void position::getPos(const int x1, const int y1)
+void pos::getPos(const int x1, const int y1)
 {
     x = x1;
     y = y1;

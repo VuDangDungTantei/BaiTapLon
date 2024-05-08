@@ -18,7 +18,7 @@ public:
     void update();
 
 private:
-    position posLand;
+    pos posLand;
 };
 
 #endif

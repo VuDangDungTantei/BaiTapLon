@@ -10,9 +10,10 @@ using namespace std;
 class paimon:Texture
 {
 public:
-    bool init(bool LPaimon);
 
-    void render();
+    void initPaimon();
+
+    void renderP();
 
     void Free();
 
@@ -23,12 +24,11 @@ public:
 
     void fall();
 
-    void update(int pileWidth, int pileHeight);
+    void update(int W, int H);
 private:
-    int angle, time, x0;
-    int ahead = 0;
-    string saved_path = "";
-    position posPaimon;
+    int angle, time, now;
+    int next = 0;
+    pos posPaimon;
 };
 
 #endif

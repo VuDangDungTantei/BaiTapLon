@@ -6,42 +6,37 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
-const int FPS = 60;
+const int FPS = 144;
 const int frameDelay = 1000 / FPS;
 int soundGetPoint = Detail::score;
 
 using namespace std;
 
-int main(int argc, char** argv)
+int main(int argc, char* argv[])
 {
-    Uint32 frameStart;
-    int frameTime;
     game g;
-    bool isMenu = 0;
-    bool isPause = 0;
-    bool isSound = 1;
-    bool LPaimon = 0;
+    bool isMenu = false;
+    bool isPause = false;
+    bool isSound = true;
 
     while(!g.isQuit())
     {
-        frameStart = SDL_GetTicks();
+       Uint32 frameStart = SDL_GetTicks();
 
         if (g.isDie())
         {
             if (isMenu)
             {
                 g.sound.playHit();
-                g.paimon.render();
             }
-            g.userInput.Type = game::input::NONE;
             while(g.isDie() && !g.isQuit())
             {
                 g.takeInput();
-                if (isMenu == 1 && g.userInput.Type == game::input::PLAY)
+                if (isMenu == true && g.userInput.Type == game::input::PLAY)
                 {
                     if (g.checkReplay())
                     {
-                        isMenu = 0;
+                        isMenu = false;
                     }
                     g.userInput.Type = game::input::NONE;
                 }
@@ -50,7 +45,7 @@ int main(int argc, char** argv)
                 g.land.render();
                 if (isMenu)
                 {
-                    g.paimon.render();
+                    g.paimon.renderP();
                     g.paimon.fall();
                     g.renderGameOver();
                     g.renderScoreSmall();
@@ -60,18 +55,17 @@ int main(int argc, char** argv)
                 else
                 {
                     g.pipe.initPipe();
-                    g.paimon.init(LPaimon);
-                    g.paimon.render();
+                    g.paimon.initPaimon();
+                    g.paimon.renderP();
                     g.rendergameMenu();
                     if (g.userInput.Type == game::input::PLAY)
                     {
                         g.Restart();
-                        isMenu = 1;
-                        g.userInput.Type = game::input::NONE;
+                        isMenu = true;
                     }
                     g.land.update();
                 }
-                g.display();
+                g.presentScene();
             }
             g.pipe.initPipe();
         }
@@ -81,10 +75,10 @@ int main(int argc, char** argv)
 
             if (g.userInput.Type == game::input::PAUSE)
             {
-                isPause = abs(1 - isPause);
+                isPause = !isPause;
                 g.userInput.Type = game::input::NONE;
             }
-            if (isPause == 0 && g.userInput.Type == game::input::PLAY)
+            if (isPause == false && g.userInput.Type == game::input::PLAY)
             {
                 if (isSound) g.sound.playFlyup();
                 g.paimon.resetTime();
@@ -94,7 +88,7 @@ int main(int argc, char** argv)
             g.renderBackground();
             g.pipe.render();
             g.land.render();
-            g.paimon.render();
+            g.paimon.renderP();
             g.renderScoreLarge();
 
             if (!isPause)
@@ -121,19 +115,19 @@ int main(int argc, char** argv)
                 {
                     if (g.checkReplay())
                     {
-                        isPause = 0;
+                        isPause = false;
                     }
                     else if (g.sound.checkSound())
                     {
-                        isSound = abs(1 - isSound);
+                        isSound = !isSound;
                     }
                     g.userInput.Type = game::input::NONE;
                 }
             }
-            g.display();
+            g.presentScene();
         }
 
-        frameTime = SDL_GetTicks() - frameStart;
+        Uint32 frameTime = SDL_GetTicks() - frameStart;
         if (frameDelay > frameTime)
         {
             SDL_Delay(frameDelay - frameTime);

@@ -19,46 +19,27 @@ bool sound::initSound()
     }
     else
     {
-        if( Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 2048) < 0 )
+        if( Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0 )
         {
             printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
             success = false;
         }
 
-        getpoint = Mix_LoadWAV( getPoint_path.c_str() );
-        if ( getpoint == NULL )
+        getpoint = Mix_LoadWAV(getPoint_path.c_str());
+        flyup = Mix_LoadWAV(flyup_path.c_str());
+        hit = Mix_LoadWAV(hit_path.c_str());
+        if (getpoint == NULL || flyup == NULL || hit == NULL)
         {
             printf( "Failed to load sound! SDL_mixer Error: %s\n", Mix_GetError() );
             success = false;
         }
-
-        flyup = Mix_LoadWAV( flyup_path.c_str() );
-        if ( flyup == NULL )
-        {
-            printf( "Failed to load sound! SDL_mixer Error: %s\n", Mix_GetError() );
-            success = false;
-        }
-
-        hit = Mix_LoadWAV( hit_path.c_str() );
-        if (hit == NULL)
-        {
-            printf( "Failed to load chord! SDL_mixer Error: %s\n", Mix_GetError() );
-            success = false;
-        }
-
         if (!LoadImg(Changesound_path, 1))
         {
             return false;
         }
 
-        Active.x = 0;
-        Active.y = 0;
-        Active.w = getWidth();
-        Active.h = getHeight() / 2;
-        Mute.x = 0;
-        Mute.y = getHeight() / 2;
-        Mute.w = getWidth();
-        Mute.h = getHeight() / 2;
+        Play = {0, 0, 32, 24};
+        Mute = {0, 24, 32, 24};
         isPlay = true;
     }
     return success;
@@ -78,46 +59,30 @@ void sound::Free()
 
 void sound::playgetPoint()
 {
-    if(isPlay)
-    {
-        Mix_PlayChannel(-1, getpoint, 0);
-    }
+    if(isPlay) Mix_PlayChannel(-1, getpoint, 0);
 }
 
 void sound::playFlyup()
 {
-    if (isPlay)
-    {
-        Mix_PlayChannel( -1, flyup, 0 );
-    }
+    if (isPlay) Mix_PlayChannel( -1, flyup, 0 );
 }
 
 void sound::playHit()
 {
-    if (isPlay)
-    {
-        Mix_PlayChannel(-1, hit, 0);
-    }
+    if (isPlay) Mix_PlayChannel(-1, hit, 0);
 }
 
 void sound::renderSound()
 {
-    if (isPlay)
-    {
-        Render(POS_X, POS_Y, 0, &Active);
-    }
-    else
-    {
-        Render(POS_X, POS_Y, 0, &Mute);
-    }
+    if (isPlay) Render(107, 267, 0, &Play);
+    else Render(107, 267, 0, &Mute);
 }
 
 bool sound::checkSound()
 {
     int x, y;
     SDL_GetMouseState(&x, &y);
-    if (x > POS_X && x < POS_X + getWidth() &&
-            y > POS_Y && y < POS_Y + getHeight())
+    if (x > 107 && x < 139 && y > 267 && y < 313)
     {
         isPlay = !isPlay;
         return true;

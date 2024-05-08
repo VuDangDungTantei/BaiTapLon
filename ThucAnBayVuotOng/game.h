@@ -13,7 +13,7 @@ class game:Texture
 public:
     struct input
     {
-        enum type { QUIT, PLAY, NONE, PAUSE};
+        enum type {QUIT, PLAY, NONE, PAUSE};
         type Type;
     };
     input userInput;
@@ -21,7 +21,7 @@ public:
     pipe pipe;
     sound sound;
     land land;
-public:
+
     game();
 
     ~game();
@@ -50,9 +50,9 @@ public:
 
     void takeInput();
 
-    void display();
+    void presentScene();
 
-    void releaseGraphic();
+    void freeGraphic();
 
     void renderScoreSmall();
 
