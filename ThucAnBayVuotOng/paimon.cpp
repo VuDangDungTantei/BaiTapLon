@@ -34,7 +34,6 @@ void paimon::fall()
         if (time == 0)
         {
             now = posPaimon.y;
-            angle = -25;
         }
         else if (angle < 70 && time > 30)
         {
@@ -57,7 +56,15 @@ void paimon::update(int W, int H)
         if (time == 0)
         {
             now = posPaimon.y;
-            angle = 0;
+            angle = 30;
+        }
+        else if (angle < 70 && time > 30)
+        {
+            angle += 6;
+        }
+        else if (angle > 0 && time < 30)
+        {
+            angle -= 3;
         }
         if (time >= 0)
         {

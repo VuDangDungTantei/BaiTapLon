@@ -76,7 +76,7 @@ public:
 
     void renderGameOver();
 
-    void replay();
+    void renderReplay();
 
     bool checkReplay();
 

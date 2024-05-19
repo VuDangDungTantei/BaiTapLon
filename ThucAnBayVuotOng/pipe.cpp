@@ -34,8 +34,8 @@ void pipe::render()
         if (posPipe[i].x <= SCREEN_WIDTH && posPipe[i].x > -65)
         {
             Render(posPipe[i].x, posPipe[i].y, 0, NULL, SDL_FLIP_NONE);
+            Render(posPipe[i].x, posPipe[i].y + 373 + PIPE_SPACE, 180, NULL, SDL_FLIP_NONE);
         }
-        Render(posPipe[i].x, posPipe[i].y + 373 + PIPE_SPACE, 180, NULL, SDL_FLIP_NONE);
     }
 }
 

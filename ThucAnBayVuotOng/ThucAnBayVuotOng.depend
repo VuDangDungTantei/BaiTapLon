@@ -90,17 +90,17 @@
 	<vector>
 	<stdio.h>
 
-1715107915 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\pipe.h
+1716136165 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\pipe.h
 	"Graphics.h"
 	<iostream>
 	<vector>
 
-1715108665 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\game.cpp
+1716133615 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\game.cpp
 	"game.h"
 	"Graphics.h"
 	<iostream>
 
-1715110709 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\game.h
+1716133634 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\game.h
 	"paimon.h"
 	"pipe.h"
 	"land.h"
@@ -126,7 +126,7 @@
 	"game.h"
 	<iostream>
 
-1715142697 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\main.cpp
+1716133644 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\main.cpp
 	"game.h"
 	"Graphics.h"
 	<time.h>
@@ -135,7 +135,7 @@
 	<SDL_image.h>
 	<SDL_ttf.h>
 
-1715109714 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\pipe.cpp
+1716136049 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\pipe.cpp
 	"pipe.h"
 	<stdio.h>
 
@@ -145,7 +145,7 @@
 	<iostream>
 	<string>
 
-1715143439 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\paimon.cpp
+1716129053 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\paimon.cpp
 	"paimon.h"
 	<stdio.h>
 	<iostream>
@@ -158,7 +158,7 @@
 1715107907 c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\graphics.h
 	"def.h"
 
-1715107907 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\graphics.cpp
+1716126469 source:c:\users\admin\desktop\lap trinh c++\laptrinhnangcao\thucanbayvuotong\graphics.cpp
 	"game.h"
 	<iostream>
 

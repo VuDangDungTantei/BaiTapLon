@@ -6,7 +6,7 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
-const int FPS = 144;
+const int FPS = 60;
 const int frameDelay = 1000 / FPS;
 int soundGetPoint = Detail::score;
 
@@ -14,117 +14,115 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    game g;
+    game flp;
     bool isMenu = false;
     bool isPause = false;
     bool isSound = true;
-
-    while(!g.isQuit())
+    while(!flp.isQuit())
     {
-       Uint32 frameStart = SDL_GetTicks();
-
-        if (g.isDie())
+        Uint32 frameStart = SDL_GetTicks();
+        if (flp.isDie())
         {
             if (isMenu)
             {
-                g.sound.playHit();
+                flp.sound.playHit();
             }
-            while(g.isDie() && !g.isQuit())
+            while(flp.isDie() && !flp.isQuit())
             {
-                g.takeInput();
-                if (isMenu == true && g.userInput.Type == game::input::PLAY)
+                flp.takeInput();
+                if (isMenu && flp.userInput.Type == game::input::PLAY)
                 {
-                    if (g.checkReplay())
+                    if (flp.checkReplay())
                     {
                         isMenu = false;
                     }
-                    g.userInput.Type = game::input::NONE;
+                    flp.userInput.Type = game::input::NONE;
                 }
-                g.renderBackground();
-                g.pipe.render();
-                g.land.render();
+                flp.renderBackground();
+                flp.pipe.render();
+                flp.land.render();
                 if (isMenu)
                 {
-                    g.paimon.renderP();
-                    g.paimon.fall();
-                    g.renderGameOver();
-                    g.renderScoreSmall();
-                    g.renderBestScore();
-                    g.replay();
+                    flp.paimon.renderP();
+                    flp.paimon.fall();
+                    flp.renderGameOver();
+                    flp.renderScoreSmall();
+                    flp.renderBestScore();
+                    flp.renderReplay();
                 }
                 else
                 {
-                    g.pipe.initPipe();
-                    g.paimon.initPaimon();
-                    g.paimon.renderP();
-                    g.rendergameMenu();
-                    if (g.userInput.Type == game::input::PLAY)
+                    flp.pipe.initPipe();
+                    flp.paimon.initPaimon();
+                    flp.paimon.renderP();
+                    flp.rendergameMenu();
+                    if (flp.userInput.Type == game::input::PLAY)
                     {
-                        g.Restart();
+                        flp.Restart();
                         isMenu = true;
                     }
-                    g.land.update();
+                    flp.land.update();
                 }
-                g.presentScene();
+                flp.presentScene();
             }
-            g.pipe.initPipe();
+            flp.pipe.initPipe();
         }
         else
         {
-            g.takeInput();
+            flp.takeInput();
 
-            if (g.userInput.Type == game::input::PAUSE)
+            if (flp.userInput.Type == game::input::PAUSE)
             {
                 isPause = !isPause;
-                g.userInput.Type = game::input::NONE;
+                flp.userInput.Type = game::input::NONE;
             }
-            if (isPause == false && g.userInput.Type == game::input::PLAY)
+            if (isPause == false && flp.userInput.Type == game::input::PLAY)
             {
-                if (isSound) g.sound.playFlyup();
-                g.paimon.resetTime();
-                g.userInput.Type = game::input::NONE;
+                if (isSound) flp.sound.playFlyup();
+                flp.paimon.resetTime();
+                flp.userInput.Type = game::input::NONE;
             }
 
-            g.renderBackground();
-            g.pipe.render();
-            g.land.render();
-            g.paimon.renderP();
-            g.renderScoreLarge();
+            flp.renderBackground();
+            flp.pipe.render();
+            flp.land.render();
+            flp.paimon.renderP();
+            flp.renderScoreLarge();
 
             if (!isPause)
             {
                 if(soundGetPoint != Detail::score && Detail::score != 0)
                 {
-                    g.sound.playgetPoint();
+                    flp.sound.playgetPoint();
                     soundGetPoint = Detail::score;
                 }
-                g.paimon.update(g.getPipeWidth(), g.getPipeHeight());
-                g.pipe.update();
-                g.land.update();
-                g.pause();
+                flp.paimon.update(flp.getPipeWidth(), flp.getPipeHeight());
+                flp.pipe.update();
+                flp.land.update();
+                flp.pause();
             }
             else
             {
-                g.resume();
-                g.renderPauseTab();
-                g.renderScoreSmall();
-                g.renderBestScore();
-                g.replay();
-                g.sound.renderSound();
-                if (g.userInput.Type == game::input::PLAY)
+                flp.resume();
+                flp.renderPauseTab();
+                flp.renderScoreSmall();
+                flp.renderBestScore();
+                flp.renderReplay();
+                flp.sound.renderSound();
+                if (flp.userInput.Type == game::input::PLAY)
                 {
-                    if (g.checkReplay())
+                    if (flp.checkReplay())
                     {
                         isPause = false;
                     }
-                    else if (g.sound.checkSound())
+                    else if (flp.sound.checkSound())
                     {
                         isSound = !isSound;
                     }
-                    g.userInput.Type = game::input::NONE;
+                    flp.userInput.Type = game::input::NONE;
                 }
             }
-            g.presentScene();
+            flp.presentScene();
         }
 
         Uint32 frameTime = SDL_GetTicks() - frameStart;

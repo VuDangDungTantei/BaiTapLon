@@ -5,20 +5,23 @@
 void game::takeInput()
 {
     SDL_Event &e = Detail::event;
+    int x, y;
     while(SDL_PollEvent(&e) != 0)
     {
+        SDL_GetMouseState(&x, &y);
         if (e.type == SDL_QUIT)
         {
             userInput.Type = input::QUIT;
             Detail::quit = true;
         }
+        else if ((e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE && e.key.repeat == 0) ||
+                 (e.type == SDL_MOUSEBUTTONDOWN && x >= 302 && x <= 325 && y >= 22 && y <= 45 && e.key.repeat == 0))
+        {
+            userInput.Type = input::PAUSE;
+        }
         else if ((e.type == SDL_MOUSEBUTTONDOWN && e.key.repeat == 0) || (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_UP && e.key.repeat == 0))
         {
             userInput.Type = input::PLAY;
-        }
-        else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE && e.key.repeat == 0)
-        {
-            userInput.Type = input::PAUSE;
         }
     }
 }
@@ -299,7 +302,7 @@ void game::renderGameOver()
     image.free();
 }
 
-void game::replay()
+void game::renderReplay()
 {
     Texture image;
     image.LoadImg("image/replay.png", 1);
