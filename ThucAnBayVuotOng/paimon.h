@@ -24,7 +24,7 @@ public:
 
     void fall();
 
-    void update(int W, int H);
+    void PlayAndDie(int W, int H);
 private:
     int angle, time, now;
     int next = 0;

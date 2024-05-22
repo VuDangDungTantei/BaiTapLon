@@ -15,7 +15,7 @@ struct pipe:Texture
 
     void render();
 
-    void update();
+    void velocity();
 
     int width()
     {

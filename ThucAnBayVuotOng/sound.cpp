@@ -28,11 +28,6 @@ bool sound::initSound()
         getpoint = Mix_LoadWAV(getPoint_path.c_str());
         flyup = Mix_LoadWAV(flyup_path.c_str());
         hit = Mix_LoadWAV(hit_path.c_str());
-        if (getpoint == NULL || flyup == NULL || hit == NULL)
-        {
-            printf( "Failed to load sound! SDL_mixer Error: %s\n", Mix_GetError() );
-            success = false;
-        }
         if (!LoadImg(Changesound_path, 1))
         {
             return false;
@@ -62,23 +57,7 @@ void sound::playgetPoint()
     if(isPlay) Mix_PlayChannel(-1, getpoint, 0);
 }
 
-void sound::playFlyup()
-{
-    if (isPlay) Mix_PlayChannel( -1, flyup, 0 );
-}
-
-void sound::playHit()
-{
-    if (isPlay) Mix_PlayChannel(-1, hit, 0);
-}
-
-void sound::renderSound()
-{
-    if (isPlay) Render(107, 267, 0, &Play);
-    else Render(107, 267, 0, &Mute);
-}
-
-bool sound::checkSound()
+bool sound::changeSound()
 {
     int x, y;
     SDL_GetMouseState(&x, &y);
@@ -89,3 +68,20 @@ bool sound::checkSound()
     }
     return false;
 }
+
+void sound::playFlyup()
+{
+    if (isPlay) Mix_PlayChannel( -1, flyup, 0 );
+}
+
+void sound::playHit()
+{
+    if (isPlay) Mix_PlayChannel(-1, hit, 0);
+}
+
+void sound::renderSoundimage()
+{
+    if (isPlay) Render(107, 267, 0, &Play);
+    else Render(107, 267, 0, &Mute);
+}
+

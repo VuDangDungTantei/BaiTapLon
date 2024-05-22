@@ -5,20 +5,14 @@
 
 bool land::initLand()
 {
-    posLand.getPos(0, SCREEN_HEIGHT - LAND_HEIGHT);
+    //Render vị trí đầu là ở bên phải màn hình
+    posLand.getPos(SCREEN_WIDTH, SCREEN_HEIGHT - LAND_HEIGHT);
     string land_path = "image/land.png";
     if (texture == NULL)
     {
-        if (LoadImg(land_path.c_str(), 1))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        if (LoadImg(land_path.c_str(), 1)) return true;
+        else return false;
     }
-    return false;
 }
 
 void land::Free()
@@ -28,23 +22,14 @@ void land::Free()
 
 void land::render()
 {
-    if (posLand.x > 0)
-    {
-        Render(posLand.x, posLand.y);
-    }
-    else if (posLand.x > -SCREEN_WIDTH && posLand.x <= 0)
-    {
-        Render(posLand.x, posLand.y);
-        Render(posLand.x + SCREEN_WIDTH, posLand.y);
-    }
-    else
-    {
-        posLand.getPos(0, SCREEN_HEIGHT - LAND_HEIGHT);
-        Render(posLand.x, posLand.y);
-    }
+    //Land trôi
+    if(posLand.x < 0) posLand.x = SCREEN_WIDTH;
+    Render(posLand.x, posLand.y);
+    Render(posLand.x - SCREEN_WIDTH, posLand.y);
 }
 
-void land::update()
+void land::velocity()
 {
+    //Tốc độ land trôi
     posLand.x -= 3;
 }

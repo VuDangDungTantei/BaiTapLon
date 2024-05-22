@@ -4,6 +4,7 @@
 #include "pipe.h"
 #include "land.h"
 #include "sound.h"
+#include "Primogem.h"
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -54,11 +55,11 @@ public:
 
     void freeGraphic();
 
-    void renderScoreSmall();
+    void renderScoreOver();
 
-    void renderScoreLarge();
+    void renderScoreGame();
 
-    void renderBestScore();
+    void BestScore();
 
     void rendergameMenu();
 

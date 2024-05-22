@@ -77,7 +77,6 @@ bool game::initGraphic() {
             }
         }
     }
-
     return success;
 }
 
@@ -87,7 +86,7 @@ void game::presentScene()
     SDL_RenderClear(Detail::renderer);
 }
 
-void game::renderScoreSmall()
+void game::renderScoreOver()
 {
     string s = to_string(Detail::score);
     int len = s.length();
@@ -134,7 +133,7 @@ void game::renderScoreSmall()
     image.free();
 }
 
-void game::renderScoreLarge()
+void game::renderScoreGame()
 {
     string s = to_string(Detail::score);
     int len = s.length();
@@ -176,12 +175,12 @@ void game::renderScoreLarge()
             image.LoadImg("image/9.png", 1);
             break;
         }
-        image.Render((SCREEN_WIDTH - (image.getWidth() * len + (len - 1) * 10)) / 2 + (i + 30) * i, 100);
+        image.Render((SCREEN_WIDTH - (image.getWidth() * len)) / 2 + 30 * i, 100);
     }
     image.free();
 }
 
-void game::renderBestScore()
+void game::BestScore()
 {
     freopen("Score/bestScore.txt", "r", stdin);
     cin >> bestScore;

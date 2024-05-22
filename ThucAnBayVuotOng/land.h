@@ -15,7 +15,7 @@ public:
 
     void render();
 
-    void update();
+    void velocity();
 
 private:
     pos posLand;
