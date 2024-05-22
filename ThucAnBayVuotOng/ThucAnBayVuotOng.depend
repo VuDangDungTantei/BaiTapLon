@@ -185,12 +185,11 @@
 	"Graphics.h"
 	<iostream>
 
-1716360518 d:\laptrinhnangcao\baitaplon\thucanbayvuotong\game.h
+1716385098 d:\laptrinhnangcao\baitaplon\thucanbayvuotong\game.h
 	"paimon.h"
 	"pipe.h"
 	"land.h"
 	"sound.h"
-	"Primogem.h"
 	<bits/stdc++.h>
 
 1716358989 d:\laptrinhnangcao\baitaplon\thucanbayvuotong\paimon.h
